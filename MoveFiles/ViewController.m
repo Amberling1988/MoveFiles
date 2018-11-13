@@ -14,10 +14,25 @@
 
 @implementation ViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self moveFiles];
 }
 
+- (void)moveFiles {
+    NSString *from = @"/Users/linglingmeng/Desktop/iOS书籍";
+    NSString *to = @"/Users/linglingmeng/Desktop/to";
+    
+    NSArray *filesArray = [[NSFileManager defaultManager] subpathsAtPath:from];
+    NSInteger count = filesArray.count;
+    for (NSInteger i = 0; i<count; i++) {
+        NSString *fullPath = [from stringByAppendingPathComponent:filesArray[i]];
+        NSString *toFullPath = [to stringByAppendingPathComponent:filesArray[i]];
+        
+        [[NSFileManager defaultManager] moveItemAtPath:fullPath toPath:toFullPath error:nil];
+                                
+                              
+    }
+    
+}
 
 @end
